@@ -72,7 +72,7 @@ struct SpinWheelView: View {
                             let y = sin(angle * .pi / 180) * geomtry.size.height / 9.5
                             
                             Text(generateRandomValues()[index].name)
-                                .Rubik(size: 6, outlineWidth: 0.0)
+                                .font(.custom("Rubik", size: 6))
                                 .foregroundColor(.black)
                                 .position(x: 15 + x, y: geomtry.size.height / 2.65 + y)
                                 .multilineTextAlignment(.center)
