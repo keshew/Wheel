@@ -80,6 +80,10 @@ struct LoadingView: View {
                     SelectCategoryView(showSelect: $preBool, navigationPath: $navigationPath)
                 case .spin:
                     SpinWheelView(navigationPath: $navigationPath)
+                case .gameChoose:
+                    ChooseGameView(navigationPath: $navigationPath)
+                case .selectRecept:
+                    SelectRecipesView(navigationPath: $navigationPath)
                 }
             }
         }

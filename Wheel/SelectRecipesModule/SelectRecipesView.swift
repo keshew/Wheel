@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct HomeView: View {
-    @StateObject var homeModel =  HomeViewModel()
+struct SelectRecipesView: View {
+    @StateObject var selectRecipesModel =  SelectRecipesViewModel()
     @Binding var navigationPath: NavigationPath
-
+    
     func goToAddRecipe() {
         navigationPath.append(AppScreen.addRecept)
     }
@@ -31,53 +31,59 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             ScrollView {
-                    VStack {
-                        Image(.homeLabel)
-                            .resizable()
-                            .frame(width: 196, height: 97)
-                        SearchView()
-                    }
+                VStack {
+                    Image(.selectRecipes)
+                        .resizable()
+                        .frame(width: 207, height: 108)
                     
-                    .padding(.vertical)
-                  
-                VStack(spacing: -5) {
+                    Text("You can choose only 6 recipes!")
+                        .Ponytail(size: 25)
+                }
+                .padding(.vertical)
+                
+                VStack(spacing: -20) {
                     ForEach(UserDefaultsManager().loadAllRecept().indices, id: \.self) { array in
                         VStack(spacing: -15) {
-                            HStack {
-                                Text(homeModel.contact.nameOfArrays[array])
-                                    .Ponytail(size: 20)
-                                    .padding(.leading, 25)
-                                Spacer()
-                            }
-                            
                             ScrollView(.horizontal) {
                                 HStack {
                                     Group {
-                                        ForEach(UserDefaultsManager().loadAllRecept()[array], id: \.name) { index in
+                                        ForEach(UserDefaultsManager().loadAllRecept()[array].indices, id: \.self) { index in
                                             Button(action: {
-                                                homeModel.goToDetail(with: index)
+                                                if selectRecipesModel.buttonStates[array].indices.contains(index) {
+                                                    selectRecipesModel.buttonStates[array][index].toggle()
+                                                    if selectRecipesModel.buttonStates[array][index] {
+                                                        if selectRecipesModel.selectedRecipes.count < 6 {
+                                                            selectRecipesModel.selectedRecipes.append(UserDefaultsManager().loadAllRecept()[array][index])
+                                                        } else {
+                                                            selectRecipesModel.buttonStates[array][index].toggle()
+                                                        }
+                                                    } else {
+                                                        if let selectedIndex = selectRecipesModel.selectedRecipes.firstIndex(where: { $0.name == UserDefaultsManager().loadAllRecept()[array][index].name }) {
+                                                            selectRecipesModel.selectedRecipes.remove(at: selectedIndex)
+                                                        }
+                                                    }
+                                                }
                                             }) {
                                                 ZStack {
-                                                    Image(.backForItem)
+                                                    Image(selectRecipesModel.buttonStates[array].indices.contains(index) ? (selectRecipesModel.buttonStates[array][index] ? .choosenItem : .backForItem) : .backForItem)
                                                         .resizable()
                                                         .frame(width: 135, height: 126)
                                                         .shadow(radius: 3, y: 6)
                                                     
-                                                    Text(index.name)
+                                                    Text(UserDefaultsManager().loadAllRecept()[array][index].name)
                                                         .Rubik(size: 11, outlineWidth: 0.3)
                                                         .lineLimit(2)
                                                         .minimumScaleFactor(0.5)
                                                         .frame(width: 120)
                                                         .offset(y: -40)
                                                     
-                                                    Image(index.image)
+                                                    Image(UserDefaultsManager().loadAllRecept()[array][index].image)
                                                         .resizable()
                                                         .frame(width: 80, height: 80)
                                                         .offset(y: 15)
                                                 }
                                             }
                                             .padding(.horizontal, 5)
-                                            
                                         }
                                     }
                                 }
@@ -88,9 +94,23 @@ struct HomeView: View {
                     }
                 }
                 
+                Button(action: {
+                    if selectRecipesModel.selectedRecipes.count == 6  {
+                        selectRecipesModel.goToRoll()
+                    }
+                }) {
+                    ZStack {
+                        Image(.backForSoundButton)
+                            .resizable()
+                            .frame(width: 119, height: 54)
+                        
+                        Text("Roll!")
+                            .Ponytail(size: 20)
+                    }
+                }
                 
                 HStack(spacing: 20) {
-                    SmallButton(action: homeModel.goToMenu,
+                    SmallButton(action: goToWheel,
                                 image: ImageName.home.rawValue,
                                 text: "Home")
                     
@@ -111,11 +131,12 @@ struct HomeView: View {
                                 image: ImageName.profile.rawValue,
                                 text: "Profile")
                 }
-                .padding(.top)
+                .padding(.top, 30)
             }
             .scrollIndicators(.hidden)
-            .navigationDestination(isPresented: $homeModel.isDetailAvailible) {
-                DetailView(recept: $homeModel.recept ,navigationPath: $navigationPath)
+            
+            .navigationDestination(isPresented: $selectRecipesModel.isRollAvailible) {
+                RollRecipesView(navigationPath: $navigationPath, items: $selectRecipesModel.selectedRecipes)
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -124,6 +145,5 @@ struct HomeView: View {
 
 #Preview {
     let navigationPath = NavigationPath()
-    return HomeView(navigationPath: .constant(navigationPath))
+    return SelectRecipesView(navigationPath: .constant(navigationPath))
 }
-

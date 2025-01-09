@@ -22,7 +22,7 @@ struct RecipeView: View {
     }
     
     func goToLuck() {
-        navigationPath.append(AppScreen.wheel)
+        navigationPath.append(AppScreen.gameChoose)
     }
     
     var body: some View {

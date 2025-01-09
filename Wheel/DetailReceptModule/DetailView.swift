@@ -21,6 +21,10 @@ struct DetailView: View {
         navigationPath.append(AppScreen.home)
     }
     
+    func goToWheel() {
+        navigationPath.append(AppScreen.gameChoose)
+    }
+    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -44,11 +48,27 @@ struct DetailView: View {
                         
                         Spacer()
                     }
+             
                     
-                    Image(.receptLabel)
-                        .resizable()
-                        .frame(width: geometry.size.width * 0.58,
+                    HStack(spacing: -10) {
+                        Image(.receptLabel)
+                            .resizable()
+                            .frame(width: geometry.size.width * 0.58,
                                height: geometry.size.height * 0.13)
+                        
+                        Button(action: {
+                            detailModel.toggleFav()
+                        }) {
+                            Image(detailModel.addToFav())
+                                .resizable()
+                                .frame(width: 53,
+                                       height: 53)
+                                .offset(y: 2)
+                        }
+                    }
+                    .padding(.leading, 20)
+                    
+                    
                     
                     VStack(spacing: 20) {
                         ZStack {
@@ -104,7 +124,7 @@ struct DetailView: View {
                                     image: ImageName.home.rawValue,
                                     text: "Home")
                         
-                        SmallButton(action: detailModel.goToMenu,
+                        SmallButton(action: goToWheel,
                                     image: ImageName.luck.rawValue,
                                     text: "Luck")
                         

@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum AppScreen {
+enum AppScreen: Hashable {
     case home
     case settings
     case profile
@@ -9,6 +9,8 @@ enum AppScreen {
     case wheel
     case select
     case spin
+    case gameChoose
+    case selectRecept
 }
 
 class LoadingViewModel: ObservableObject {

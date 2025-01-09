@@ -17,7 +17,7 @@ struct SettingsView: View {
     }
     
     func goToWheel() {
-        navigationPath.append(AppScreen.wheel)
+        navigationPath.append(AppScreen.gameChoose)
     }
     
     var body: some View {

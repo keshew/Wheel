@@ -45,4 +45,9 @@ public enum ImageName: String {
     case wheelPin
     case selectLabel
     case yourReceptLabel
+    case addedToFav, addToFav
+    case testYourLuckLabel
+    case dice, selectRecipes, choosenItem, rollThemLabel
+    case backForDice
+    case dice1, dice2, dice3, dice4, dice5, dice6
 }

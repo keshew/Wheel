@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8666F3A72D2FF2CB005F7981 /* ChooseGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3A42D2FF2CB005F7981 /* ChooseGameView.swift */; };
+		8666F3A82D2FF2CB005F7981 /* ChooseGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3A52D2FF2CB005F7981 /* ChooseGameModel.swift */; };
+		8666F3A92D2FF2CB005F7981 /* ChooseGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3A62D2FF2CB005F7981 /* ChooseGameViewModel.swift */; };
+		8666F3AE2D30051E005F7981 /* SelectRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3AB2D30051E005F7981 /* SelectRecipesView.swift */; };
+		8666F3AF2D30051E005F7981 /* SelectRecipesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3AC2D30051E005F7981 /* SelectRecipesModel.swift */; };
+		8666F3B02D30051E005F7981 /* SelectRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3AD2D30051E005F7981 /* SelectRecipesViewModel.swift */; };
+		8666F3B52D300EBF005F7981 /* RollRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3B22D300EBF005F7981 /* RollRecipesView.swift */; };
+		8666F3B62D300EBF005F7981 /* RollRecipesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3B32D300EBF005F7981 /* RollRecipesModel.swift */; };
+		8666F3B72D300EBF005F7981 /* RollRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666F3B42D300EBF005F7981 /* RollRecipesViewModel.swift */; };
 		869CAD392D16D98B006654FD /* WheelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869CAD382D16D98B006654FD /* WheelApp.swift */; };
 		869CAD3D2D16D98D006654FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869CAD3C2D16D98D006654FD /* Assets.xcassets */; };
 		869CAD402D16D98D006654FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869CAD3F2D16D98D006654FD /* Preview Assets.xcassets */; };
@@ -54,6 +63,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8666F3A42D2FF2CB005F7981 /* ChooseGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseGameView.swift; sourceTree = "<group>"; };
+		8666F3A52D2FF2CB005F7981 /* ChooseGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseGameModel.swift; sourceTree = "<group>"; };
+		8666F3A62D2FF2CB005F7981 /* ChooseGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseGameViewModel.swift; sourceTree = "<group>"; };
+		8666F3AB2D30051E005F7981 /* SelectRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRecipesView.swift; sourceTree = "<group>"; };
+		8666F3AC2D30051E005F7981 /* SelectRecipesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRecipesModel.swift; sourceTree = "<group>"; };
+		8666F3AD2D30051E005F7981 /* SelectRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRecipesViewModel.swift; sourceTree = "<group>"; };
+		8666F3B22D300EBF005F7981 /* RollRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollRecipesView.swift; sourceTree = "<group>"; };
+		8666F3B32D300EBF005F7981 /* RollRecipesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollRecipesModel.swift; sourceTree = "<group>"; };
+		8666F3B42D300EBF005F7981 /* RollRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollRecipesViewModel.swift; sourceTree = "<group>"; };
 		869CAD352D16D98B006654FD /* Wheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869CAD382D16D98B006654FD /* WheelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelApp.swift; sourceTree = "<group>"; };
 		869CAD3C2D16D98D006654FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +131,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8666F3A32D2FF2BD005F7981 /* ChooseGameModule */ = {
+			isa = PBXGroup;
+			children = (
+				8666F3A42D2FF2CB005F7981 /* ChooseGameView.swift */,
+				8666F3A52D2FF2CB005F7981 /* ChooseGameModel.swift */,
+				8666F3A62D2FF2CB005F7981 /* ChooseGameViewModel.swift */,
+			);
+			path = ChooseGameModule;
+			sourceTree = "<group>";
+		};
+		8666F3AA2D30050A005F7981 /* SelectRecipesModule */ = {
+			isa = PBXGroup;
+			children = (
+				8666F3AB2D30051E005F7981 /* SelectRecipesView.swift */,
+				8666F3AC2D30051E005F7981 /* SelectRecipesModel.swift */,
+				8666F3AD2D30051E005F7981 /* SelectRecipesViewModel.swift */,
+			);
+			path = SelectRecipesModule;
+			sourceTree = "<group>";
+		};
+		8666F3B12D300EA2005F7981 /* RollRecipesModule */ = {
+			isa = PBXGroup;
+			children = (
+				8666F3B22D300EBF005F7981 /* RollRecipesView.swift */,
+				8666F3B32D300EBF005F7981 /* RollRecipesModel.swift */,
+				8666F3B42D300EBF005F7981 /* RollRecipesViewModel.swift */,
+			);
+			path = RollRecipesModule;
+			sourceTree = "<group>";
+		};
 		869CAD2C2D16D98B006654FD = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +182,9 @@
 			children = (
 				869CAD532D16DBEF006654FD /* Info.plist */,
 				869CAD382D16D98B006654FD /* WheelApp.swift */,
+				8666F3B12D300EA2005F7981 /* RollRecipesModule */,
+				8666F3AA2D30050A005F7981 /* SelectRecipesModule */,
+				8666F3A32D2FF2BD005F7981 /* ChooseGameModule */,
 				869E7C752D1B729400963CAC /* RecipeModule */,
 				869E7C6E2D1B6ED900963CAC /* SpinWheelModule */,
 				869E7C672D1B6A3C00963CAC /* SelectCategoryModule */,
@@ -446,6 +497,9 @@
 				869E7C7A2D1B72A300963CAC /* RecipeModel.swift in Sources */,
 				869E7C7B2D1B72A300963CAC /* RecipeViewModel.swift in Sources */,
 				869CAD392D16D98B006654FD /* WheelApp.swift in Sources */,
+				8666F3B52D300EBF005F7981 /* RollRecipesView.swift in Sources */,
+				8666F3B62D300EBF005F7981 /* RollRecipesModel.swift in Sources */,
+				8666F3B72D300EBF005F7981 /* RollRecipesViewModel.swift in Sources */,
 				869CAD5A2D16DC4C006654FD /* OutlineExtension.swift in Sources */,
 				86C75BF32D19FC9100557C3A /* SettingsView.swift in Sources */,
 				86C75BF42D19FC9100557C3A /* SettingsModel.swift in Sources */,
@@ -458,10 +512,16 @@
 				869E7C5F2D1AD8E800963CAC /* AddReceptViewModel.swift in Sources */,
 				869CAD612D16DE0B006654FD /* LoadingViewModel.swift in Sources */,
 				86C75BFB2D1A0B2400557C3A /* ProfileView.swift in Sources */,
+				8666F3AE2D30051E005F7981 /* SelectRecipesView.swift in Sources */,
+				8666F3AF2D30051E005F7981 /* SelectRecipesModel.swift in Sources */,
+				8666F3B02D30051E005F7981 /* SelectRecipesViewModel.swift in Sources */,
 				86C75BFC2D1A0B2400557C3A /* ProfileModel.swift in Sources */,
 				86C75BFD2D1A0B2400557C3A /* ProfileViewModel.swift in Sources */,
 				869CAD562D16DC1D006654FD /* TextExtension.swift in Sources */,
 				869CAD4E2D16DA18006654FD /* ImageName.swift in Sources */,
+				8666F3A72D2FF2CB005F7981 /* ChooseGameView.swift in Sources */,
+				8666F3A82D2FF2CB005F7981 /* ChooseGameModel.swift in Sources */,
+				8666F3A92D2FF2CB005F7981 /* ChooseGameViewModel.swift in Sources */,
 				869CAD4C2D16D9EC006654FD /* CustomButton.swift in Sources */,
 				869E7C642D1AE73F00963CAC /* WheelView.swift in Sources */,
 				869E7C652D1AE73F00963CAC /* WheelModel.swift in Sources */,
