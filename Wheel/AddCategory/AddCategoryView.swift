@@ -118,19 +118,19 @@ struct AddCategoryView: View {
                             }
                         
                         Button(action: {
-                            if addCategoryModel.selectedImage == nil  {
-                                saveCategory(text: addCategoryModel.text, image: ImageName.profileRectangle.rawValue)
-                                navigationPath.append(AppScreen.profile)
+                            
+                            if addCategoryModel.selectedImage == nil || addCategoryModel.text == ""  {
+                                return
+                            } else if addCategoryModel.selectedImage == nil {
+                                return
                             } else if addCategoryModel.text == "" {
-                                saveCategory(text: "Category", image: addCategoryModel.imageString)
-                                navigationPath.append(AppScreen.profile)
-                            } else if addCategoryModel.selectedImage == nil || addCategoryModel.text == "" {
-                                saveCategory(text: "Category", image: ImageName.profileRectangle.rawValue)
-                                navigationPath.append(AppScreen.profile)
+                                return
                             } else {
                                 saveCategory(text: addCategoryModel.text, image: addCategoryModel.imageString)
                                 navigationPath.append(AppScreen.profile)
                             }
+                            
+                            
                         }) {
                             ZStack {
                                 Image(.backForAddButton)
