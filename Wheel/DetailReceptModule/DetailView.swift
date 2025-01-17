@@ -153,7 +153,7 @@ struct DetailView: View {
 
 #Preview {
     let navigationPath = NavigationPath()
-    @State var recept = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "")
+    @State var recept = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "", isRecipeOfMounth: false)
     return DetailView(recept: $recept, navigationPath: .constant(navigationPath))
 }
 

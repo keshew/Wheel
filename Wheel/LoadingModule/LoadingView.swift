@@ -84,6 +84,12 @@ struct LoadingView: View {
                     ChooseGameView(navigationPath: $navigationPath)
                 case .selectRecept:
                     SelectRecipesView(navigationPath: $navigationPath)
+                case .fav:
+                    FavoriteView(navigationPath: $navigationPath)
+                case .game:
+                    GameView(navigationPath: $navigationPath)
+                case .achievements:
+                    AchievementsView(navigationPath: $navigationPath)
                 }
             }
         }

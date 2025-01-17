@@ -25,6 +25,16 @@ struct AddReceptView: View {
         navigationPath.append(AppScreen.gameChoose)
     }
     
+    func saveRecipe(name: String, ingredients: String, recept: String, image: String) {
+        UserDefaultsManager().saveNewSelfRecipes(Item(name: name,
+                                                      ingredients: ingredients,
+                                                      recept: recept,
+                                                      image: image,
+                                                      detailImage: image,
+                                                      isRecipeOfMounth: false))
+        UserDefaultsManager().addRecipesCount()
+    }
+    
     var body: some View {
         ZStack {
             Image(.mainBackground)
@@ -53,19 +63,127 @@ struct AddReceptView: View {
                         .frame(width: 266, height: 80)
                     
                     VStack(spacing: -10) {
-                        PickImages()
+                        PhotosPicker(
+                            selection: $addReceptModel.selectedItem,
+                            matching: .images,
+                            photoLibrary: .shared()) {
+                                if let selectedImage = addReceptModel.selectedImage {
+                                    selectedImage
+                                        .resizable()
+                                        .frame(width: 200, height: 200)
+                                        .cornerRadius(100)
+                                } else {
+                                    ZStack {
+                                        Image(.picForCategory)
+                                            .resizable()
+                                            .frame(width: 200, height: 200)
+                                        
+                                        Text("Place your Photo here...")
+                                            .Ponytail(size: 18)
+                                    }
+                                }
+                            }
+                            .onChange(of: addReceptModel.selectedItem) { oldItem, newItem in
+                                guard let newItem else { return }
+                                Task {
+                                    if let data = try? await newItem.loadTransferable(type: Data.self),
+                                       let uiImage = UIImage(data: data) {
+                                        addReceptModel.selectedImage = Image(uiImage: uiImage)
+                                        if let imageData = uiImage.jpegData(compressionQuality: 0.5) {
+                                            let base64String = imageData.base64EncodedString()
+                                            addReceptModel.imageString = base64String
+                                        }
+                                    }
+                                }
+                            }
                         
                         HStack {
-                            CustomSmallTextEditor()
+                            TextEditor(text: $addReceptModel.text2)
+                                .padding()
+                                .font(.custom("Ribik", size: 15))
+                                .foregroundColor(.white)
+                                .outlineText(width: 0.2)
+                                .shadow(color: .black.opacity(0.3), radius: 2, y: 6)
+                                .background(
+                                    Image(.nameForCategoryBack)
+                                        .resizable()
+                                        .frame(width: 162, height: 93)
+                                )
+                                .frame(width: 162, height: 93)
+                                .scrollContentBackground(.hidden)
+                                .scrollIndicators(.hidden)
+                                .padding()
+                                .onTapGesture {
+                                    withAnimation {
+                                        addReceptModel.text2 = ""
+                                    }
+                                }
                             
-                            CustomSmallTextEditor(text: "Name category here...")
+                            TextEditor(text: $addReceptModel.text3)
+                                .padding()
+                                .font(.custom("Ribik", size: 15))
+                                .foregroundColor(.white)
+                                .outlineText(width: 0.2)
+                                .shadow(color: .black.opacity(0.3), radius: 2, y: 6)
+                                .background(
+                                    Image(.nameForCategoryBack)
+                                        .resizable()
+                                        .frame(width: 162, height: 93)
+                                )
+                                .frame(width: 162, height: 93)
+                                .scrollContentBackground(.hidden)
+                                .scrollIndicators(.hidden)
+                                .padding()
+                                .onTapGesture {
+                                    withAnimation {
+                                        addReceptModel.text3 = ""
+                                    }
+                                }
                         }
                         
-                        CustomTextEditor(text: "Write recipe here...",
-                                         size: 25)
+                        TextEditor(text: $addReceptModel.text)
+                            .padding()
+                            .font(.custom("Ribik", size: 25))
+                            .foregroundColor(.white)
+                            .outlineText(width: 0.2)
+                            .shadow(color: .black.opacity(0.3), radius: 2, y: 6)
+                            .background(
+                                Image(.nameForCategoryBack)
+                                    .resizable()
+                                    .frame(width: 341, height: 181)
+                            )
+                            .frame(width: 341, height: 181)
+                            .scrollContentBackground(.hidden)
+                            .scrollIndicators(.hidden)
+                            .padding()
+                            .onTapGesture {
+                                withAnimation {
+                                    addReceptModel.text = ""
+                                }
+                            }
                         
-                        WidthestAddButton(action: addReceptModel.goToMenu)
-                            .offset(y: 45)
+                        Button(action: {
+                            if addReceptModel.text != "" || addReceptModel.text2 != "" || addReceptModel.text3 != "" {
+                                saveRecipe(name: addReceptModel.text3, ingredients: addReceptModel.text2, recept: addReceptModel.text, image: addReceptModel.imageString)
+                                navigationPath.append(AppScreen.profile)
+                            }
+                        }) {
+                            ZStack {
+                                Image(.backForAddButton)
+                                    .resizable()
+                                    .frame(width: 100, height: 55)
+                                
+                                Image(name: .addForegroundImage)
+                                    .resizable()
+                                    .frame(width: 21, height: 21)
+                                    .offset(y: -10)
+                                
+                                Text("Add")
+                                    .Ponytail(size: 18)
+                                    .offset(y: 14)
+                            }
+                        }
+                        .offset(y: -30)
                     }
                 }
                 

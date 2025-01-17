@@ -2,7 +2,7 @@ import SwiftUI
 import PhotosUI
 
 struct SearchView: View {
-    @State var show = false
+    @State var show = true
     @State var text = ""
     @FocusState var isTyping: Bool
     
@@ -12,26 +12,26 @@ struct SearchView: View {
                 .foregroundStyle(.thinMaterial)
                 .shadow(color: .black.opacity(0.1), radius: 0, y: 6)
             HStack {
-                Image(systemName: show ? "xmark" : "magnifyingglass").font(.title2)
+                Image(systemName: "magnifyingglass").font(.title2)
                     .foregroundStyle(.primary.opacity(0.5))
                     .contentTransition(.symbolEffect)
                     .onTapGesture {
                         withAnimation {
                             text = ""
-                            show.toggle()
-                            isTyping.toggle()
+//                            show.toggle()
+//                            isTyping.toggle()
                         }
                     }
                 
                 TextField("Search...", text: $text)
                     .focused($isTyping)
-                    .opacity(isTyping ? 1 : 0)
+                    .opacity(isTyping ? 0 : 1)
             }
             .padding(.leading, 11)
         }
-        .frame(width: show ? 300 : 50, height: 50)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.leading, 45)
+        .frame(width: 220, height: 50)
+        .frame(maxWidth: .infinity, alignment: .center)
+//        .padding(.leading, 55)
     }
 }
 
@@ -64,6 +64,7 @@ struct SmallButton: View {
     var action: () -> Void
     var image: String
     var text: String
+    var textSize: CGFloat = 12
     var sizeImage: CGFloat = 24
     var offsetXImage: CGFloat = 0
     var body: some View {
@@ -82,7 +83,7 @@ struct SmallButton: View {
                     .offset(x: offsetXImage ,y: -6)
                 
                 Text(text)
-                    .font(.custom("Ponytail", size: 12))
+                    .font(.custom("Ponytail", size: textSize))
                     .foregroundColor(.white)
                     .offset(y: 16)
             }
@@ -217,5 +218,37 @@ struct SimpleButton: View {
                     .Ponytail(size: 20)
             }
         }
+    }
+}
+
+struct AchievementsIsDone: View {
+    var text: String
+    var image: String
+    var body: some View {
+        HStack {
+            ZStack {
+                Image(.backForAchievements)
+                    .resizable()
+                    .frame(width: 264, height: 88)
+                
+                Text(text)
+                    .Ponytail(size: 18)
+            }
+            Spacer()
+            
+            ZStack {
+                Image(.roundBack)
+                    .resizable()
+                    .frame(width: 65, height: 65)
+                    
+                Image(image)
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .offset(y: -4)
+            }
+            .offset(y: 2)
+            .padding(.trailing, 20)
+        }
+        .padding(.leading)
     }
 }

@@ -22,4 +22,16 @@ class DetailViewModel: ObservableObject {
         }
         return image
     }
+    
+    func convertBase64ToImage(base64String: String) -> Image? {
+        guard let data = Data(base64Encoded: base64String) else {
+            return nil
+        }
+        
+        guard let uiImage = UIImage(data: data) else {
+            return nil
+        }
+        
+        return Image(uiImage: uiImage)
+    }
 }

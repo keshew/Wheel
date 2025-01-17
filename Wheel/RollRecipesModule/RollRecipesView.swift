@@ -64,6 +64,8 @@ struct RollRecipesView: View {
         rollRecipesModel.stopTimer = Timer.scheduledTimer(withTimeInterval: randomTime, repeats: false) { _ in
             stopAnimation()
         }
+        
+        UserDefaultsManager().addDicePlayed()
     }
     
     func stopAnimation() {
@@ -190,7 +192,8 @@ struct RollRecipesView: View {
                              ingredients: "",
                              recept: "",
                              image: "",
-                             detailImage: "")]
+                             detailImage: "",
+                             isRecipeOfMounth: false)]
     return RollRecipesView(navigationPath: .constant(navigationPath), items: $items)
 }
 

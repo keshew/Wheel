@@ -4,7 +4,7 @@ struct SpinWheelView: View {
     @StateObject var spinWheelModel =  SpinWheelViewModel()
     @State private var rotation: Double = 0
     @Binding var navigationPath: NavigationPath
-    @State private var selectedItem: Item = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "")
+    @State private var selectedItem: Item = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "", isRecipeOfMounth: false)
     @State var showRecept = false
     
     private func generateRandomValues() -> [Item] {
@@ -29,6 +29,7 @@ struct SpinWheelView: View {
             
             showRecept = true
         }
+        UserDefaultsManager().addWheelPlayed()
     }
     
     var body: some View {

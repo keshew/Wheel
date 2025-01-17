@@ -24,6 +24,10 @@ struct ProfileView: View {
         navigationPath.append(AppScreen.gameChoose)
     }
     
+    func goToAchevment() {
+        navigationPath.append(AppScreen.achievements)
+    }
+    
     var body: some View {
         ZStack {
             Image(.mainBackground)
@@ -41,7 +45,17 @@ struct ProfileView: View {
                             .resizable()
                             .frame(width: 273, height: 94)
                         
-                        SearchView()
+                        HStack(spacing: -70) {
+                            SmallButton(action: goToAchevment,
+                                        image: ImageName.achirvments.rawValue,
+                                        text: "Achievements",
+                                        textSize: 7.4,
+                                        sizeImage: 30)
+                            
+                            .padding(.leading, 20)
+                            SearchView()
+                            
+                        }
                     }
                     
                     
@@ -66,18 +80,29 @@ struct ProfileView: View {
                             }
                             ScrollView(.horizontal) {
                                 HStack {
-                                    ForEach(0..<profileModel.contact.categoriesArray.count, id: \.self) { category in
+                                    ForEach(UserDefaultsManager().loadAllCategory(), id: \.nameCategory) { category in
                                         ZStack {
-                                            Image(.profileRectangle)
-                                                .resizable()
-                                                .frame(width: 135, height: 126)
-                                                .shadow(radius: 3, y: 6)
+                                            if let image = profileModel.convertBase64ToImage(base64String: category.imageOfCategory) {
+                                                image
+                                                    .resizable()
+                                                    .frame(width: 135, height: 126)
+                                                    .cornerRadius(20)
+                                                    .shadow(radius: 3, y: 6)
+                                            } else {
+                                                Image(category.imageOfCategory)
+                                                    .resizable()
+                                                    .frame(width: 135, height: 126)
+                                                    .shadow(radius: 3, y: 6)
+                                            }
                                             
-                                            Text(profileModel.contact.categoriesArray[category])
+                                            Text(category.nameCategory)
                                                 .Rubik(size: 30)
+                                                .frame(width: 110, height: 120)
+                                                .minimumScaleFactor(0.8)
                                             
                                         }
-                                        .padding(.leading)
+                                        .padding(.leading, 10)
+                                        .padding(.trailing, 10)
                                     }
                                 }
                             }
@@ -94,8 +119,8 @@ struct ProfileView: View {
                             }
                             
                             ScrollView(.horizontal) {
-                                    HStack {
-                                        ForEach(0..<profileModel.contact.lastRecipeArray.count, id: \.self) { recept in
+                                HStack {
+                                    ForEach(0..<profileModel.contact.lastRecipeArray.count, id: \.self) { recept in
                                         ZStack {
                                             Image(.profileRectangle)
                                                 .resizable()
@@ -113,10 +138,11 @@ struct ProfileView: View {
                                                 .resizable()
                                                 .frame(width: 84, height: 84)
                                                 .offset(y: 15)
-
+                                            
                                             
                                         }
-                                        .padding(.leading)
+                                        .padding(.leading, 10)
+                                        .padding(.trailing, 10)
                                     }
                                 }
                             }
@@ -131,22 +157,31 @@ struct ProfileView: View {
                                 
                                 Spacer()
                             }
-                        ScrollView(.horizontal) {
+                            ScrollView(.horizontal) {
                                 HStack {
-                                    ForEach(0..<profileModel.contact.selfMadeRecipe.count, id: \.self) { selfMakeRecept in
-                                    ZStack {
-                                        Image(.profileRectangle)
-                                            .resizable()
-                                            .frame(width: 135, height: 126)
-                                            .shadow(radius: 3, y: 6)
-                                        
-                                        Text(profileModel.contact.selfMadeRecipe[selfMakeRecept])
-                                            .Rubik(size: 20)
-                                        
-                                    }
-                                    .padding(.leading)
-                                }
+                                    ForEach(UserDefaultsManager().loadSelfRecipes(), id: \.name) { selfMakeRecept in
+                                        ZStack {
+                                            if let image = profileModel.convertBase64ToImage(base64String: selfMakeRecept.image) {
+                                                image
+                                                    .resizable()
+                                                    .frame(width: 135, height: 126)
+                                                    .cornerRadius(20)
+                                                    .shadow(radius: 3, y: 6)
+                                            } else {
+                                                Image(.profileRectangle)
+                                                    .resizable()
+                                                    .frame(width: 135, height: 126)
+                                                    .shadow(radius: 3, y: 6)
                                             }
+                                            
+                                            Text(selfMakeRecept.name)
+                                                .Rubik(size: 20)
+                                                .frame(width: 130)
+                                        }
+                                        .padding(.leading, 10)
+                                        .padding(.trailing, 10)
+                                    }
+                                }
                             }
                         }
                     }
@@ -180,6 +215,10 @@ struct ProfileView: View {
             }
             .scrollIndicators(.hidden)
         }
+        .navigationDestination(isPresented: $profileModel.isDetailAvailible) {
+            DetailView(recept: $profileModel.recept ,navigationPath: $navigationPath)
+        }
+        
         .navigationBarBackButtonHidden(true)
     }
 }

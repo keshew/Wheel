@@ -8,7 +8,7 @@ class RollRecipesViewModel: ObservableObject {
     @Published var timer: Timer?
     @Published var stopTimer: Timer?
     @Published var showRecept = false
-    @Published var selectedItem: Item = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "")
+    @Published var selectedItem: Item = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "", isRecipeOfMounth: false)
     func goToMenu() {
         
     }

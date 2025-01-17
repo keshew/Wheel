@@ -50,4 +50,13 @@ public enum ImageName: String {
     case dice, selectRecipes, choosenItem, rollThemLabel
     case backForDice
     case dice1, dice2, dice3, dice4, dice5, dice6
+    case star
+    case favLabel
+    case pressedButtonBack
+    case smallChocolateImages, smallChocolateImages1, smallChocolateImages2, smallChocolateImages3, smallChocolateImages4
+    case detailChocolate1, detailChocolate2, detailChocolate3, detailChocolate4, detailChocolate5
+    case achirvments, achievementsLabel, backForAchievements, roundBack, done, undone
+    case gameLabel, bug, candy
+    case question
+    case waitLabel
 }

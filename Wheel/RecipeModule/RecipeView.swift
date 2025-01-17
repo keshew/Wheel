@@ -69,8 +69,19 @@ struct RecipeView: View {
                                 .offset(y: 17)
                         }
                         
-                        SimpleButton(action: recipeModel.goToMenu,
-                                     text: "Go and cook!")
+                        Button(action: {
+                            recipeModel.goToDetail(with: recept)
+                           
+                        }) {
+                            ZStack {
+                                Image(.backForSoundButton)
+                                    .resizable()
+                                    .frame(width: 130, height: 69)
+                                
+                                Text("Go and cook!")
+                                    .Ponytail(size: 20)
+                            }
+                        }
                     }
                     
                     
@@ -101,13 +112,21 @@ struct RecipeView: View {
                 }
             }
         }
+        
+        .onAppear {
+            UserDefaultsManager().updateItem(recept, with: false)
+        }
         .navigationBarBackButtonHidden(true)
+        
+        .navigationDestination(isPresented: $recipeModel.isDetailAvailible) {
+            DetailView(recept: $recipeModel.recept ,navigationPath: $navigationPath)
+        }
     }
 }
 
 #Preview {
     let navigationPath = NavigationPath()
-    @State var item = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "")
+    @State var item = Item(name: "", ingredients: "", recept: "", image: "", detailImage: "", isRecipeOfMounth: false)
     return RecipeView(recept: $item, navigationPath: .constant(navigationPath))
 }
 

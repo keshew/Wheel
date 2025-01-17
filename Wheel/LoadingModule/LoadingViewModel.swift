@@ -11,6 +11,9 @@ enum AppScreen: Hashable {
     case spin
     case gameChoose
     case selectRecept
+    case fav
+    case game
+    case achievements
 }
 
 class LoadingViewModel: ObservableObject {
